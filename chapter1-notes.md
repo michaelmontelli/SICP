@@ -68,6 +68,42 @@ Running Scheme code:
 
 ### Chapter 1.3 Notes
 - **Higher-order procedure** -> Procedure that manipulates other procedures (as argument or return)
-
-
+- `lambda` special form
+  - Same as other languages, inline procedure -> `(lambda (x) (+ x 4))`
+  - **Equivalence betweem lambdas and procedures**
+    - `(define (plus4 x) (+ x 4))`
+    - `(define plus4 (lambda (x) (+ x 4)))`
+  - Immediately invoked lambda
+```scheme
+(define (f x y)
+  ((lambda (a b)
+     (+ (* x (square a)) 
+        (* y b) 
+        (* a b)))
+   (+ 1 (* x y))
+   (- 1 y)))
+```
+- `let` to define variables
+```scheme
+(let ((var1 <exp1>)
+      (var2 <exp2>))
+    <body>)
+```
+  - Actually, let is interpreted as an immediately invoked lambda -> syntactic sugar
+```scheme
+((lambda (var1 var2)
+    <body>)
+ <exp1>
+ <exp2>)
+```
+  - This means scope of the variables of `let` are the body
+- Can raise error with `error keyword`
+```scheme
+...
+(else
+   (error "Values are not of 
+           opposite sign" a b)))))
+```
+- Can define constants with define at the top, similarly to C! -> `(define tolerance 0.00001)`
+- **first-class status** -> elements in programming languages with fewest restrictions
 

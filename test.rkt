@@ -1,10 +1,8 @@
 #lang sicp
 
-(define dx 0.00001)
-(define (deriv g)
-  (lambda (x)
-    (/ (- (g (+ x dx))
-          (g x))
-       dx)))
-(define (cube x) (* x x x))
-((deriv cube) 5)
+(define (list-at items n)
+  (if (= n 0)
+      (car items)
+      (list-at (cdr items) (- n 1))))
+(define squares (list 1 4 9 16 25))
+(list-at squares 3)

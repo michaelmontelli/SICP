@@ -66,6 +66,7 @@ Running Scheme code:
 - **List**
   - List is **DEFINED** in terms of cons
   - `nil` is the **empty list**
+  - `(cadr mylist)` is short for `(car (cdr mylist))`
 ```scheme
 (list 1 2 3 4)
 ```
@@ -74,6 +75,40 @@ Running Scheme code:
       (cons 2
             (cons 3
                   (cons 4 nil))))
+```
+- List operations
+  - Common to "cdr-down" a list -> See `list-at` and `length`
+  - Also common to "cdr-down" a list and "cons-up" a result list -> see `append`
+```scheme
+(define (list-at items n)
+  (if (= n 0)
+      (car items)
+      (list-at (cdr items) (- n 1))))
+
+```
+```scheme
+(define (length items)
+    (if (null? items)
+        0
+        (+ 1 (length (cdr items)))))
+
+(define (lengthi items)
+    (define (length-iter a count)
+        (if (null? a)
+            count
+            (length-iter (cdr a) (+ 1 count))))
+    (length-iter items 0))
+```
+```scheme
+(define (append list1 list2)
+    (if (null? list1)
+        list2
+        (cons (car list1) (append (cdr list1) list2))))
+```
+- Var args
+  - Can put a `.` that indicates procedure can take variable number of args, which are placed in a list in the variable after the dot. Number of args before the dot indicate mandatory-params.
+```scheme
+(define (f x y . z) <body>)
 ```
 
 
